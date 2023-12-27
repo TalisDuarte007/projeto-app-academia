@@ -1,0 +1,24 @@
+{
+  "tipoTreino": "Peito",
+  "nomeAluno": "Talis Duarte",
+  "exercicios": [
+    {
+      "id": 1,
+      "series": 3,
+      "repeticoes": 10,
+      "tecnicaEspecial": "drop-set"
+    },
+    {
+      "id": 3,
+      "series": 4,
+      "repeticoes": 12
+    },
+    {
+      "id": 5,
+      "series": 3,
+      "repeticoes": 8,
+      "tecnicaEspecial": "bi-set",
+      "exercicioAdicional": 7  // ID do exercício adicional para bi-set
+    }
+  ]
+}
