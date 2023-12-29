@@ -1,6 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PesquisaAlunos from '../components/PesquisaAlunos';
+import { StyledBoxPrincipal } from './Paginas-styledcomponents';
+import dragaoVermelho from '../views/images/dragao_vermelho.png';
+import '../autosugest.css';
+
 
 const PaginaPrincipal = () => {
   const navigate = useNavigate();
@@ -10,10 +14,11 @@ const PaginaPrincipal = () => {
   };
 
   return (
-    <div>
-      <h2>Página Principal</h2>
+    <StyledBoxPrincipal>
+      <img src={dragaoVermelho} alt="" />
+      <h2>Academia Red Dragon</h2>
       <PesquisaAlunos onSelectAluno={handleSelectAluno} />
-    </div>
+    </StyledBoxPrincipal>
   );
 };
 

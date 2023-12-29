@@ -1,0 +1,23 @@
+.my-autosuggest-input {
+    width: 90%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.my-suggestion-item{
+    font-size: 28px;
+    font-family: 'Raleway', sans-serif;
+    list-style-type: none;
+    margin-bottom: 10px;
+}
+
+.my-suggestion-item:hover{
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.react-autosuggest__suggestions-container--open{
+    list-style-type: none; 
+}

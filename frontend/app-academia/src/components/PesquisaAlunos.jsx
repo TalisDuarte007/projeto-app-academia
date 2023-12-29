@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Autosuggest from 'react-autosuggest';
+import '../autosugest.css';
 
 const PesquisaAlunos = ({ onSelectAluno }) => {
   const [alunos, setAlunos] = useState([]);
@@ -35,7 +36,10 @@ const PesquisaAlunos = ({ onSelectAluno }) => {
 
   const getSuggestionValue = (suggestion) => suggestion.nome;
 
-  const renderSuggestion = (suggestion) => <div>{suggestion.nome}</div>;
+  const renderSuggestion = (suggestion) => 
+    <div className="my-suggestion-item">
+      {suggestion.nome}
+    </div>;
 
   const onSuggestionSelected = (event, { suggestion }) => {
     onSelectAluno(suggestion.id);
@@ -59,7 +63,12 @@ const PesquisaAlunos = ({ onSelectAluno }) => {
       getSuggestionValue={getSuggestionValue}
       renderSuggestion={renderSuggestion}
       onSuggestionSelected={onSuggestionSelected}
-      inputProps={inputProps}
+      inputProps={{
+        placeholder: inputProps.placeholder,
+        value: inputProps.value,
+        onChange: inputProps.onChange,
+        className: 'my-autosuggest-input',
+      }}
     />
   );
 };

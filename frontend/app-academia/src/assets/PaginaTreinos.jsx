@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { StyledBoxPrincipal, StyledBotoesTreinos } from './Paginas-styledcomponents';
+import dragaoVermelho from '../views/images/dragao_vermelho.png';
 
 const PaginaTreinos = () => {
   const { id } = useParams();
@@ -25,18 +27,19 @@ const PaginaTreinos = () => {
   };
 
   return (
-    <div>
+    <StyledBoxPrincipal>
+      <img src={dragaoVermelho} alt="" />
       <h2>Escolha o Treino</h2>
-      <div>
+      <StyledBotoesTreinos>
         {treinos.map((treino) => (
           <div key={treino.id}>
-            <button onClick={() => handleTreinoClick(treino)}>
+            <button className='botao-treinos' onClick={() => handleTreinoClick(treino)}>
               {treino.tipoTreino}
             </button>
           </div>
         ))}
-      </div>
-    </div>
+      </StyledBotoesTreinos>
+    </StyledBoxPrincipal>
   );
 };
 

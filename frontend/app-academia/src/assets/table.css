@@ -1,0 +1,26 @@
+/* Estilizando a tabela em geral */
+table {
+    border-collapse: collapse; /* Remove espaçamento entre as células */
+  }
+  
+  /* Estilizando o cabeçalho */
+  thead {
+    background-color: #f2f2f2; /* Cor de fundo para distinguir o cabeçalho */
+  }
+  
+  /* Estilizando as células do cabeçalho */
+  th {
+    text-align: center;
+    padding: 10px; /* Adicione padding conforme necessário */
+  }
+  
+  /* Estilizando o corpo da tabela */
+  tbody {
+    text-align: center; /* Alinha o conteúdo das células ao centro */
+  }
+  
+  /* Estilizando as células do corpo */
+  td {
+    padding: 10px; /* Adicione padding conforme necessário */
+    border: 1px solid #ddd; /* Adiciona uma borda para separar as células */
+  }
