@@ -1,0 +1,30 @@
+meu-projeto/
+|-- backend/
+|   |-- src/
+|   |   |-- main/
+|   |       |-- java/
+|   |           |-- ... (código-fonte Java)
+|   |
+|   |-- resources/
+|   |   |-- ... (arquivos de configuração, templates, etc.)
+|   |
+|   |-- ...
+|
+|-- frontend/
+|   |-- public/
+|   |   |-- index.html
+|   |   |-- ... (outros arquivos estáticos)
+|   |
+|   |-- src/
+|   |   |-- assets/
+|   |       |-- ... (imagens, fontes, etc.)
+|   |
+|   |   |-- components/
+|   |       |-- ... (componentes Vue, React, Angular, etc.)
+|   |
+|   |   |-- views/
+|   |       |-- ... (páginas principais do aplicativo)
+|   |
+|   |   |-- App.vue (ou arquivo principal do framework)
+|   |
+

@@ -1,6 +1,8 @@
 package acad.reddragon.api.detalhe_treino;
 
+import acad.reddragon.api.exercicio.Exercicio;
 import acad.reddragon.api.treino.Treino;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,35 +16,35 @@ import java.math.BigInteger;
 @AllArgsConstructor
 @Entity
 @Table(name = "detalhes_treino")
+@Getter
 public class DetalheTreino {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private BigInteger id;
 
-    @Getter
     @Setter
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "treino_id")
     private Treino treino;
 
-    @Getter
     @Column(name = "exercicio_id")
     private BigInteger exercicioId;
 
-    @Getter
+    @ManyToOne
+    @JoinColumn(name = "exercicio_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Exercicio exercicio;
+
     @Column(name = "series")
     private int series;
 
-    @Getter
     @Column(name = "repeticoes")
     private int repeticoes;
 
-    @Getter
     @Column(name = "tecnica")
     private String tecnica;
 
-    @Getter
     @Column(name = "exercicio_adicional_id")
     private BigInteger exercicioAdicionalId;
 

@@ -2,9 +2,12 @@ package acad.reddragon.api.treino;
 
 import acad.reddragon.api.detalhe_treino.DetalheTreino;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +18,22 @@ public class Treino {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger id;
+
+    @Setter
+    @Getter
     @Column(name = "tipo_treino")
     private String tipoTreino;
     @Column(name = "aluno_id")
     private BigInteger alunoId;
 
     @Getter
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "treino")
     private List<DetalheTreino> detalhesTreino;
+
+    public Treino() {
+        // Construtor padrão sem argumentos
+    }
 
     @JsonCreator
     public Treino(@JsonProperty("tipoTreino") String tipoTreino,
@@ -42,13 +53,6 @@ public class Treino {
                     detalhe.getRepeticoes(),
                     detalhe.getTecnica(),
                     detalhe.getExercicioAdicionalId());
-            System.out.println(detalhe);
-            System.out.println("ExercicioId: " + detalhe.getExercicioId());
-            System.out.println("Series: " + detalhe.getSeries());
-            System.out.println("Repeticoes: " + detalhe.getRepeticoes());
-            System.out.println("Tecnica: " + detalhe.getTecnica());
-            System.out.println("ExercicioAdicionalId: " + detalhe.getExercicioAdicionalId());
-            System.out.println("--------------");
         }
     }
 }
