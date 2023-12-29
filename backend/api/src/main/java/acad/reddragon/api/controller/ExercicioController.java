@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,12 +35,20 @@ public class ExercicioController {
     }
 
     @GetMapping
-    public List<DadosListagemExercicio> lista(@RequestParam(value = "categoria", required = false) Categoria categoria) {
-
-        return repository.findAll().stream()
-                .filter(exercicio -> categoria == null || exercicio.getCategoria() == categoria)
-                .map(DadosListagemExercicio::new)
-                .collect(Collectors.toList());
+    public List<Exercicio> listaTodos() {
+        return repository.findAll();
     }
+
+
+    @GetMapping("/{idExercicio}")
+    public ResponseEntity<DadosListagemExercicio> buscaPorId(@PathVariable Long idExercicio) {
+        Exercicio exercicio = repository.findById(idExercicio).orElse(null);
+        if (exercicio == null) {
+            return ResponseEntity.notFound().build();
+        }
+        DadosListagemExercicio dadosExercicio = new DadosListagemExercicio(exercicio);
+        return ResponseEntity.ok(dadosExercicio);
+    }
+
 
 }

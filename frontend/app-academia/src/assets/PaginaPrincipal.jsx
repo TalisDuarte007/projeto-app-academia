@@ -6,7 +6,6 @@ const PaginaPrincipal = () => {
   const navigate = useNavigate();
 
   const handleSelectAluno = (alunoId) => {
-    // Navegar para a página de treinos com o ID do aluno
     navigate(`/alunos/${alunoId}/treinos`);
   };
 

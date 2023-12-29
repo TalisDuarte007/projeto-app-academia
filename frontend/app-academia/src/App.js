@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<PaginaPrincipal />} />
         <Route path='/alunos/:id/treinos' element={<PaginaTreinos/>}/>
         <Route path="/alunos/:alunoId" element={<PaginaAluno />} />
-        <Route path="/alunos/:alunoId/treinos/:treinoId/exercicios" element={<PaginaExercicios />} />
+        <Route path="/pagina-exercicios" element={<PaginaExercicios />} />
         {/* Adicione mais rotas conforme necessário */}
       </Routes>
     </Router>

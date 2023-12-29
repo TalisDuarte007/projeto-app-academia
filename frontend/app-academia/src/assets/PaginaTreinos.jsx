@@ -21,7 +21,6 @@ const PaginaTreinos = () => {
   }, [id]);
 
   const handleTreinoClick = (treino) => {
-    // Navegar para a próxima página passando os dados do treino como parâmetros de consulta
     navigate(`/pagina-exercicios?tipoTreino=${treino.tipoTreino}&detalhesTreino=${encodeURIComponent(JSON.stringify(treino.detalhesTreino))}&id=${treino.id}`);
   };
 
