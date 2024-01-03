@@ -6,11 +6,14 @@ import acad.reddragon.api.treino.TreinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("treinos")
@@ -28,6 +31,35 @@ public class TreinoController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/alunos/{id}/treinos/{treinoId}")
+    public ResponseEntity<Optional<Treino>> buscarTreinoDoAlunoById(@PathVariable Long id, @PathVariable Long treinoId) {
+        Optional<Treino> treinoDoAluno = repository.findById(BigInteger.valueOf(treinoId));
+        return ResponseEntity.ok(treinoDoAluno);
+    }
+
+    @GetMapping("/alunos/{id}/treinos/{treinoId}/exercicios/{exercicioId}")
+    public ResponseEntity<Optional<DetalheTreino>> buscarExercicioDoTreinoById(
+            @PathVariable Long id,
+            @PathVariable Long treinoId,
+            @PathVariable Long exercicioId) {
+
+        Optional<Treino> treinoDoAluno = repository.findById(BigInteger.valueOf(treinoId));
+
+        if (treinoDoAluno.isPresent()) {
+            List<DetalheTreino> detalhesTreino = treinoDoAluno.get().getDetalhesTreino();
+
+            Optional<DetalheTreino> exercicio = detalhesTreino.stream()
+                    .filter(det -> det.getId().equals(BigInteger.valueOf(exercicioId)))
+                    .findFirst();
+
+            return ResponseEntity.of(Optional.of(exercicio));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 
     @PostMapping
     public ResponseEntity<List<Treino>> criarTreinos(@RequestBody List<Treino> treinos) {
@@ -49,6 +81,39 @@ public class TreinoController {
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(novosTreinos);
+    }
+
+    @PutMapping("/alunos/{id}/treinos/{treinoId}/exercicio/{exercicioId}")
+    public ResponseEntity<DetalheTreino> atualizarExercicioDoTreino(
+            @PathVariable Long id,
+            @PathVariable Long treinoId,
+            @PathVariable Long exercicioId,
+            @RequestBody DetalheTreino novoExercicio) {
+
+        Optional<Treino> treinoDoAluno = repository.findById(BigInteger.valueOf(treinoId));
+
+        if (treinoDoAluno.isPresent()) {
+            List<DetalheTreino> detalhesTreino = treinoDoAluno.get().getDetalhesTreino();
+
+            for (DetalheTreino exercicio : detalhesTreino) {
+                if (exercicio.getId().equals(BigInteger.valueOf(exercicioId))) {
+                    // Atualiza os dados do exercício com os novos dados fornecidos
+                    exercicio.setCarga(novoExercicio.getCarga());
+                    // Adicione aqui os outros campos que deseja atualizar
+
+                    // Salva as alterações no treino
+                    repository.save(treinoDoAluno.get());
+
+                    return ResponseEntity.ok(exercicio);
+                }
+            }
+
+            // Se o exercício não for encontrado, retorne um status 404 (Not Found)
+            return ResponseEntity.notFound().build();
+        } else {
+            // Se o treino não for encontrado, retorne um status 404 (Not Found)
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

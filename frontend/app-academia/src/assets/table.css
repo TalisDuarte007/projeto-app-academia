@@ -24,3 +24,14 @@ table {
     padding: 10px; /* Adicione padding conforme necessário */
     border: 1px solid #ddd; /* Adiciona uma borda para separar as células */
   }
+
+  .btn{
+    border: none;
+    background-color: white;
+    cursor: pointer;
+  }
+
+  .btnVideo{
+    width: 30px;
+    height: auto;
+  }

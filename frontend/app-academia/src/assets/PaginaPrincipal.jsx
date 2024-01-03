@@ -15,7 +15,7 @@ const PaginaPrincipal = () => {
 
   return (
     <StyledBoxPrincipal>
-      <img src={dragaoVermelho} alt="" />
+      <img className='logo' src={dragaoVermelho} alt="" />
       <h2>Academia Red Dragon</h2>
       <PesquisaAlunos onSelectAluno={handleSelectAluno} />
     </StyledBoxPrincipal>

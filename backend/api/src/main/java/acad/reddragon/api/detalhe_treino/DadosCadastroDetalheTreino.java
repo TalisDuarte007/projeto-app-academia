@@ -1,8 +1,10 @@
 package acad.reddragon.api.detalhe_treino;
+
 import acad.reddragon.api.treino.Treino;
 
 import java.math.BigInteger;
-public record DadosCadastroTreino(
+
+public record DadosCadastroDetalheTreino(
         Treino treino,
         BigInteger exercicioId,
         int series,

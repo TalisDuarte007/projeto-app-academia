@@ -2,10 +2,10 @@ package acad.reddragon.api.exercicio;
 
 public record DadosListagemExercicio(
         String nome,
-        String descricao,
-        String musculo_trabalhado
+        String musculo_trabalhado,
+        String link_gif
 ) {
     public DadosListagemExercicio(Exercicio exercicio){
-        this(exercicio.getNome(), exercicio.getDescricao(), exercicio.getMusculo_trabalhado());
+        this(exercicio.getNome(), exercicio.getMusculo_trabalhado(), exercicio.getLink_gif());
     }
 }

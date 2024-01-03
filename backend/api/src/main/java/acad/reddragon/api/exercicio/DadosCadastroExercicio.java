@@ -6,11 +6,11 @@ import jakarta.validation.constraints.NotNull;
 public record DadosCadastroExercicio(
         @NotBlank
         String nome,
-        String descricao,
         @NotBlank
         String musculo_trabalhado,
         @NotNull
-        Categoria categoria
+        Categoria categoria,
+        String link_gif
 
 ) {
 }

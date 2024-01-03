@@ -23,12 +23,13 @@ const PaginaTreinos = () => {
   }, [id]);
 
   const handleTreinoClick = (treino) => {
-    navigate(`/pagina-exercicios?tipoTreino=${treino.tipoTreino}&detalhesTreino=${encodeURIComponent(JSON.stringify(treino.detalhesTreino))}&id=${treino.id}`);
+    console.log(id)
+    navigate(`/pagina-exercicios?tipoTreino=${treino.tipoTreino}&detalhesTreino=${encodeURIComponent(JSON.stringify(treino.detalhesTreino))}&id=${treino.treinoId}&alunoId=${id}`);
   };
 
   return (
     <StyledBoxPrincipal>
-      <img src={dragaoVermelho} alt="" />
+      <img className='logo' src={dragaoVermelho} alt="" />
       <h2>Escolha o Treino</h2>
       <StyledBotoesTreinos>
         {treinos.map((treino) => (

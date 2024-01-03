@@ -5,6 +5,7 @@ import acad.reddragon.api.treino.Treino;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,16 +46,22 @@ public class DetalheTreino {
     @Column(name = "tecnica")
     private String tecnica;
 
-    @Column(name = "exercicio_adicional_id")
-    private BigInteger exercicioAdicionalId;
+    @NotNull
+    @Column(name = "descanso")
+    private int descanso;
 
-    public DetalheTreino(Treino treino, BigInteger exercicioId, int series, int repeticoes, String tecnica, BigInteger exercicioAdicionalId) {
+    @Setter
+    @Column(name = "carga")
+    private Float carga;
+
+    public DetalheTreino(Treino treino, BigInteger exercicioId, int series, int repeticoes, String tecnica, int descanso, Float carga) {
         this.treino = treino;
         this.exercicioId = exercicioId;
         this.series = series;
         this.repeticoes = repeticoes;
         this.tecnica = tecnica;
-        this.exercicioAdicionalId = exercicioAdicionalId;
+        this.descanso = descanso;
+        this.carga = carga;
     }
 
     @Override
@@ -66,7 +73,8 @@ public class DetalheTreino {
                 ", series=" + series +
                 ", repeticoes=" + repeticoes +
                 ", tecnica='" + tecnica + '\'' +
-                ", exercicioAdicionalId=" + exercicioAdicionalId +
+                ", descanso='" + descanso + '\''+
+                ", carga='" + carga + '\''+
                 '}';
     }
 }

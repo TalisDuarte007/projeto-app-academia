@@ -38,9 +38,11 @@ public class Treino {
     @JsonCreator
     public Treino(@JsonProperty("tipoTreino") String tipoTreino,
                   @JsonProperty("alunoId") BigInteger alunoId,
+                  @JsonProperty("treinoId") BigInteger id,
                   @JsonProperty("detalhesTreino") List<DetalheTreino> detalhesTreino) {
         this.tipoTreino = tipoTreino;
         this.alunoId = alunoId;
+        this.id = id;
         this.detalhesTreino = new ArrayList<>();
 
         for (DetalheTreino detalhe : detalhesTreino) {
@@ -52,7 +54,8 @@ public class Treino {
                     detalhe.getSeries(),
                     detalhe.getRepeticoes(),
                     detalhe.getTecnica(),
-                    detalhe.getExercicioAdicionalId());
+                    detalhe.getDescanso(),
+                    detalhe.getCarga());
         }
     }
 }
