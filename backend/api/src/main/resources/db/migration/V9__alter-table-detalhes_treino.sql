@@ -1,2 +1,0 @@
-ALTER TABLE detalhes_treino
-DROP COLUMN exercicio_adicional_id;

@@ -1,3 +1,4 @@
+
 -- Perna
 INSERT INTO Exercicios (nome, descricao, musculo_trabalhado, categoria) VALUES
   ('Agachamento Livre', 'Levante e desça com a barra nas costas', 'Quadríceps', 'PERNA'),

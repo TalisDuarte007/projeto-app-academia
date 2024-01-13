@@ -1,0 +1,7 @@
+CREATE TABLE usuario (
+    id bigint PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    role VARCHAR(20) NOT NULL
+);
