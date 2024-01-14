@@ -6,6 +6,8 @@ import { StyledModalOverlay, StyledModalContent, StyledCloseButton } from './Pag
 const ProfessorDashboard = () => {
   const [cadastroNovoAlunoVisible, setCadastroNovoAlunoVisible] = useState(false);
   const [cadastroNovoProfessorVisible, setCadastroNovoProfessorVisible] = useState(false);
+  const [suggestModalVisible, setSuggestModalVisible] = useState(false);
+  const [alunosDoProfessor, setAlunosDoProfessor] = useState([]);
   const [usuario, setUsuario] = useState({ id: '', nome: ''});
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
@@ -35,6 +37,31 @@ const ProfessorDashboard = () => {
     }
   }, [id]);
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+  
+    if (token && usuario.idProfessor) {
+      api.defaults.headers['Authorization'] = `Bearer ${token}`;
+  
+      api.get(`/professor/${usuario.idProfessor}/alunos`)
+        .then(response => {
+          console.log(response)
+          setAlunosDoProfessor(response.data);
+        })
+        .catch(error => {
+          if (error.response && error.response.status === 401) {
+            // Tratar erro de autenticação, talvez redirecionar para a página de login
+            console.error('Erro de autenticação. Redirecionando para a página de login.');
+          } else {
+            console.error('Erro ao obter informações dos alunos deste professor:', error);
+          }
+        });
+    }
+  }, [usuario.idProfessor]);
+  
+
+  
+
   const openCadastroNovoAluno = () => {
     setCadastroNovoAlunoVisible(true)
   }
@@ -46,6 +73,13 @@ const ProfessorDashboard = () => {
   }
   const closeCadastroNovoProfessor = () => {
     setCadastroNovoProfessorVisible(false)
+  }
+  const openSuggestModal = () => {
+    console.log(alunosDoProfessor)
+    setSuggestModalVisible(true)
+  }
+  const closeSuggestModal = () => {
+    setSuggestModalVisible(false)
   }
   const handleSalvarNovoAluno = async (nome, email, senha, roleAluno, idProfessor) => {
     try {
@@ -77,7 +111,6 @@ const ProfessorDashboard = () => {
       console.error('Erro ao fazer a requisição:', error);
     }
   };
-
 
   const handleSalvarNovoProfessor = async (nome, email, senha, roleProfessor) => {
     try {
@@ -118,7 +151,7 @@ const ProfessorDashboard = () => {
       <div>
         <button onClick={openCadastroNovoAluno}>Cadastrar novo Aluno</button>
         <button onClick={openCadastroNovoProfessor}>Cadastrar novo Professor</button>
-        <button>Editar Treino</button>
+        <button onClick={openSuggestModal}>Editar Treino</button>
       </div>
 
       {cadastroNovoAlunoVisible && (
@@ -199,6 +232,17 @@ const ProfessorDashboard = () => {
                <button onClick={() => handleSalvarNovoProfessor(nome, email, senha, roleProfessor)}>Salvar</button>
 
             </form>
+          </StyledModalContent>
+        </StyledModalOverlay>
+      )}
+
+      {suggestModalVisible && (
+        <StyledModalOverlay>
+          <StyledModalContent>
+            <StyledCloseButton onClick={closeSuggestModal}>
+              X
+            </StyledCloseButton>
+              {alunosDoProfessor}
           </StyledModalContent>
         </StyledModalOverlay>
       )}
